@@ -78,6 +78,11 @@ public abstract class Amaze
 		var s = 1;
 		GotoLine(270);
 
+		while (true)
+		{
+			pp
+		}
+		
 		while (Target != -1) 
 		{
 			switch (Target) 

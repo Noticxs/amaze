@@ -2,7 +2,7 @@
 
 namespace amaze_new;
 
-public abstract class Amaze
+public abstract class Amaze_SRC
 {
 	private static int Target { get; set; }
 	public static Random RandomSeed { get; set; } = new Random(0);
@@ -11,11 +11,11 @@ public abstract class Amaze
 	public static string Result = "";
 #pragma warning restore CA2211
 
-	public static void Main(string[] args)
-	{
-		Run(int.Parse(args[0]),int.Parse(args[1]));
-		// Console.WriteLine(Result);
-	}
+	// public static void Main(string[] args)
+	// {
+	// 	Run(int.Parse(args[0]),int.Parse(args[1]));
+	// 	// Console.WriteLine(Result);
+	// }
 
 	private static void BlankLine()
 	{
