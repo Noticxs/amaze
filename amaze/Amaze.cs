@@ -2,39 +2,6 @@
 
 namespace amaze_new;
 
-// public interface IAmaze
-// {
-	// public enum Output
-	// {
-		// Text,
-		// Pixel
-	// }
-
-	// public void CheckOuputType(Output outputType)
-	// {
-		// switch (outputType)
-		// {
-			// case Output.Text:
-				// Console.WriteLine("Handling Text output state.");
-				// break;
-			// case Output.Pixel:
-				// Console.WriteLine("Handling Pixel output state.");
-				// break;
-			// default:
-				// throw new ArgumentOutOfRangeException(nameof(outputType), outputType, null);
-		// }
-	// }
-// }
-
-// public class AmazeNew
-// {
-
-	// public void Runner(int horizontalOriginal, int verticalOriginal, IAmaze.Output getOutputOption)
-	// {
-		// _ = getOutputOption;
-	// }
-// }
-
 public abstract class Amaze
 {
 	private static int Target { get; set; }
