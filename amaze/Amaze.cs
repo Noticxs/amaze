@@ -6,11 +6,13 @@ public abstract class Amaze
 {
 	private static int Target { get; set; }
 	public static Random RandomSeed { get; set; } = new Random(0);
+#pragma warning disable CA2211
 	public static string Result = "";
+#pragma warning restore CA2211
 
 	public static void Main(string[] args)
 	{
-		Runner(int.Parse(args[0]),int.Parse(args[1]));
+		Run(int.Parse(args[0]),int.Parse(args[1]));
 		Console.WriteLine(Result);
 	}
 
@@ -39,7 +41,7 @@ public abstract class Amaze
 		Target = lineNumber;
 	}
 
-	public static void Runner(int horizontalOriginal, int verticalOriginal) 
+	public static void Run(int horizontalOriginal, int verticalOriginal) 
 	{
 		Clear();
 		Print("Amazing - Copyright by Creative Computing, Morristown, NJ");
@@ -47,19 +49,17 @@ public abstract class Amaze
 
 		
 		// Set default variable values
-		var horizontal = horizontalOriginal;
-		var vertical = verticalOriginal;
-		if ( horizontal == 1 || vertical == 1) return;
+		if ( horizontalOriginal == 1 || verticalOriginal == 1) return;
 
-		var widthArray = new int[ horizontal + 1,vertical + 1];
-		var verticalArray = new int[ horizontal + 1,vertical + 1];
+		var widthArray = new int[ horizontalOriginal + 1,verticalOriginal + 1];
+		var verticalArray = new int[ horizontalOriginal + 1,verticalOriginal + 1];
 		
 		var q = 0;
 		var z = 0;
-		var randomInt = Random( horizontal);
+		var randomInt = Random( horizontalOriginal);
 
 		// 130:170
-		for (var i = 1; i <=  horizontal; i++)
+		for (var i = 1; i <=  horizontalOriginal; i++)
 		{
 			Print(i == randomInt ? ":  " : ":--");
 		}
@@ -68,13 +68,13 @@ public abstract class Amaze
 		Println();
 
 		// 190
-		int c = 1;
+		var c = 1;
 		widthArray[randomInt,1] = c;
 		c++;
 
 		// 200
-		int r = randomInt;
-		int s = 1;
+		var r = randomInt;
+		var s = 1;
 		GotoLine(270);
 
 		while (Target != -1) 
@@ -82,10 +82,10 @@ public abstract class Amaze
 			switch (Target) 
 			{
 				case 210:
-					GotoLine(r != horizontal ? 250 : 220);
+					GotoLine(r != horizontalOriginal ? 250 : 220);
 					continue;
 				case 220:
-					GotoLine(s != vertical ? 240 : 230);
+					GotoLine(s != verticalOriginal ? 240 : 230);
 					continue;
 				case 230:
 					r = 1;
@@ -120,7 +120,7 @@ public abstract class Amaze
 					GotoLine(widthArray[r, s - 1] != 0 ? 430 : 310);
 					continue;
 				case 310:
-					GotoLine(r == horizontal ? 350 : 320);
+					GotoLine(r == horizontalOriginal ? 350 : 320);
 					continue;
 				case 320:
 					GotoLine(widthArray[r + 1, s] != 0 ? 350 : 330);
@@ -147,7 +147,7 @@ public abstract class Amaze
 					}
 					continue;
 				case 350:
-					GotoLine(s != vertical ? 380 : 360);
+					GotoLine(s != verticalOriginal ? 380 : 360);
 					continue;
 				case 360:
 					GotoLine(z == 1 ? 410 : 370);
@@ -199,13 +199,13 @@ public abstract class Amaze
 					}
 					continue;
 				case 430:
-					GotoLine(r == horizontal ? 530 : 440);
+					GotoLine(r == horizontalOriginal ? 530 : 440);
 					continue;
 				case 440:
 					GotoLine(widthArray[r + 1, s] != 0 ? 530 : 450);
 					continue;
 				case 450:
-					GotoLine(s != vertical ? 480 : 460);
+					GotoLine(s != verticalOriginal ? 480 : 460);
 					continue;
 				case 460:
 					GotoLine(z == 1 ? 510 : 470);
@@ -257,7 +257,7 @@ public abstract class Amaze
 					}
 					continue;
 				case 530:
-					GotoLine(s != vertical ? 560 : 540);
+					GotoLine(s != verticalOriginal ? 560 : 540);
 					continue;
 				case 540:
 					GotoLine(z == 1 ? 590 : 550);
@@ -297,13 +297,13 @@ public abstract class Amaze
 					GotoLine(widthArray[r, s - 1] != 0 ? 790 : 620);
 					continue;
 				case 620:
-					GotoLine(r == horizontal ? 720 : 630);
+					GotoLine(r == horizontalOriginal ? 720 : 630);
 					continue;
 				case 630:
 					GotoLine(widthArray[r + 1, s] != 0 ? 720 : 640);
 					continue;
 				case 640:
-					GotoLine(s != vertical ? 670 : 650);
+					GotoLine(s != verticalOriginal ? 670 : 650);
 					continue;
 				case 650:
 					GotoLine(z == 1 ? 700 : 660);
@@ -355,7 +355,7 @@ public abstract class Amaze
 					}
 					continue;
 				case 720:
-					GotoLine(s != vertical ? 750 : 730);
+					GotoLine(s != verticalOriginal ? 750 : 730);
 					continue;
 				case 730:
 					GotoLine(z == 1 ? 780 : 740);
@@ -389,13 +389,13 @@ public abstract class Amaze
 					GotoLine(980);
 					continue;
 				case 790:
-					GotoLine(r == horizontal ? 880 : 800);
+					GotoLine(r == horizontalOriginal ? 880 : 800);
 					continue;
 				case 800:
 					GotoLine(widthArray[r + 1, s] != 0 ? 880 : 810);
 					continue;
 				case 810:
-					GotoLine(s != vertical ? 840 : 820);
+					GotoLine(s != verticalOriginal ? 840 : 820);
 					continue;
 				case 820:
 					GotoLine(z == 1 ? 870 : 830);
@@ -429,7 +429,7 @@ public abstract class Amaze
 					GotoLine(1020);
 					continue;
 				case 880:
-					GotoLine(s != vertical ? 910 : 890);
+					GotoLine(s != verticalOriginal ? 910 : 890);
 					continue;
 				case 890:
 					GotoLine(z == 1 ? 930 : 900);
@@ -458,7 +458,7 @@ public abstract class Amaze
 					GotoLine(960);
 					continue;
 				case 960:
-					GotoLine(c == horizontal * vertical + 1 ? 1200 : 970);
+					GotoLine(c == horizontalOriginal * verticalOriginal + 1 ? 1200 : 970);
 					continue;
 				case 970:
 					q = 0;
@@ -475,7 +475,7 @@ public abstract class Amaze
 				case 1000:
 					verticalArray[r,s - 1] = 1;
 					s--;
-					GotoLine(c == horizontal * vertical + 1 ? 1200 : 1010);
+					GotoLine(c == horizontalOriginal * verticalOriginal + 1 ? 1200 : 1010);
 					continue;
 				case 1010:
 					q = 0;
@@ -502,7 +502,7 @@ public abstract class Amaze
 					GotoLine(1070);
 					continue;
 				case 1070:
-					GotoLine(c == horizontal * vertical + 1 ? 1200 : 1080);
+					GotoLine(c == horizontalOriginal * verticalOriginal + 1 ? 1200 : 1080);
 					continue;
 				case 1080:
 					GotoLine(600);
@@ -525,7 +525,7 @@ public abstract class Amaze
 					continue;
 				case 1130:
 					s++;
-					GotoLine(c == vertical * horizontal + 1 ? 1200 : 1140);
+					GotoLine(c == verticalOriginal * horizontalOriginal + 1 ? 1200 : 1140);
 					continue;
 				case 1140:
 					GotoLine(270);
@@ -560,11 +560,11 @@ public abstract class Amaze
 		}
 
 		// 1200:
-		for (var j = 1; j <= vertical; j++) 
+		for (var j = 1; j <= verticalOriginal; j++) 
 		{
 			Print("I");        // 1210
 
-			for (var i = 1; i <=  horizontal; i++)
+			for (var i = 1; i <=  horizontalOriginal; i++)
 			{
 				Print(verticalArray[i, j] >= 2 ? "   " : "  I"); // 1260
 				// 1240
@@ -573,7 +573,7 @@ public abstract class Amaze
 			Print(" ");   // 1280
 			Println();
 
-			for (var i = 1; i <=  horizontal; i++)
+			for (var i = 1; i <=  horizontalOriginal; i++)
 			{
 				switch (verticalArray[i,j])
 				{

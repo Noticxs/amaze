@@ -52,7 +52,7 @@ I                 I  I     I     I           I
 :--:--:--:--:--:--:--:--:--:--:--:  :--:--:--:
 ";
         Amaze.RandomSeed = new Random(0);
-        Amaze.Runner(15, 20);
+        Amaze.Run(15, 20);
         
         Console.WriteLine(Amaze.Result);
         
@@ -81,7 +81,7 @@ I        I  I
         // GOAL -> simplify this code out
         
         Amaze.RandomSeed = new Random(100);
-        Amaze.Runner(4, 5);
+        Amaze.Run(4, 5);
         
         Console.WriteLine(Amaze.Result);
         
