@@ -14,10 +14,10 @@ public interface IAmaze
 	{
 		switch (outputType)
 		{
-			case IAmaze.Output.Text:
+			case Output.Text:
 				Console.WriteLine("Handling Text output state.");
 				break;
-			case IAmaze.Output.Pixel:
+			case Output.Pixel:
 				Console.WriteLine("Handling Pixel output state.");
 				break;
 			default:
