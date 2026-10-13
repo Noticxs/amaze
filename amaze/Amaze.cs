@@ -41,6 +41,13 @@ public abstract class Amaze
 	{
 		Target = lineNumber;
 	}
+	
+	public enum ProcessState {
+		Exit = 0,
+		DrawWall = 100,
+		DrawEntrance = 270,
+		Finish = 500
+	}
 
 	public static void Run(int horizontalOriginal, int verticalOriginal) 
 	{
