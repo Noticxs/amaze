@@ -69,9 +69,9 @@ public abstract class Amaze
 		NewLine();
 
 		// 190
-		var c = 1;
-		widthArray[randomInt,1] = c;
-		c++;
+		var counter = 1;
+		widthArray[randomInt,1] = counter;
+		counter++;
 
 		// 200
 		var randomInteger = randomInt;
@@ -103,10 +103,7 @@ public abstract class Amaze
 					GotoLine(260);
 					continue;
 				case 260:
-					if (widthArray[randomInteger,s] == 0)
-						GotoLine(210);
-					else
-						GotoLine(270);
+					GotoLine(widthArray[randomInteger, s] == 0 ? 210 : 270);
 					continue;
 				case 270:
 					GotoLine(randomInteger - 1 == 0 ? 600 : 280);
@@ -449,45 +446,45 @@ public abstract class Amaze
 					GotoLine(1190);
 					continue;
 				case 940:
-					widthArray[randomInteger - 1,s] = c;
+					widthArray[randomInteger - 1,s] = counter;
 					GotoLine(950);
 					continue;
 				case 950:
-					c++;
+					counter++;
 					verticalArray[randomInteger - 1,s] = 2;
 					randomInteger--;
 					GotoLine(960);
 					continue;
 				case 960:
-					GotoLine(c == horizontalOriginal * verticalOriginal + 1 ? 1200 : 970);
+					GotoLine(counter == horizontalOriginal * verticalOriginal + 1 ? 1200 : 970);
 					continue;
 				case 970:
 					q = 0;
 					GotoLine(270);
 					continue;
 				case 980:
-					widthArray[randomInteger,s - 1] = c;
+					widthArray[randomInteger,s - 1] = counter;
 					GotoLine(990);
 					continue;
 				case 990:
-					c++;
+					counter++;
 					GotoLine(1000);
 					continue;
 				case 1000:
 					verticalArray[randomInteger,s - 1] = 1;
 					s--;
-					GotoLine(c == horizontalOriginal * verticalOriginal + 1 ? 1200 : 1010);
+					GotoLine(counter == horizontalOriginal * verticalOriginal + 1 ? 1200 : 1010);
 					continue;
 				case 1010:
 					q = 0;
 					GotoLine(270);
 					continue;
 				case 1020:
-					widthArray[randomInteger + 1,s] = c;
+					widthArray[randomInteger + 1,s] = counter;
 					GotoLine(1030);
 					continue;
 				case 1030:
-					c++;
+					counter++;
 					GotoLine(verticalArray[randomInteger, s] == 0 ? 1050 : 1040);
 					continue;
 				case 1040:
@@ -503,7 +500,7 @@ public abstract class Amaze
 					GotoLine(1070);
 					continue;
 				case 1070:
-					GotoLine(c == horizontalOriginal * verticalOriginal + 1 ? 1200 : 1080);
+					GotoLine(counter == horizontalOriginal * verticalOriginal + 1 ? 1200 : 1080);
 					continue;
 				case 1080:
 					GotoLine(600);
@@ -512,8 +509,8 @@ public abstract class Amaze
 					GotoLine(q == 1 ? 1150 : 1100);
 					continue;
 				case 1100:
-					widthArray[randomInteger,s + 1] = c;
-					c++;
+					widthArray[randomInteger,s + 1] = counter;
+					counter++;
 					GotoLine(verticalArray[randomInteger, s] == 0 ? 1120 : 1110);
 					continue;
 				case 1110:
@@ -526,7 +523,7 @@ public abstract class Amaze
 					continue;
 				case 1130:
 					s++;
-					GotoLine(c == verticalOriginal * horizontalOriginal + 1 ? 1200 : 1140);
+					GotoLine(counter == verticalOriginal * horizontalOriginal + 1 ? 1200 : 1140);
 					continue;
 				case 1140:
 					GotoLine(270);
