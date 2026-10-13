@@ -2,38 +2,38 @@
 
 namespace amaze_new;
 
-public interface IAmaze
-{
-	public enum Output
-	{
-		Text,
-		Pixel
-	}
+// public interface IAmaze
+// {
+	// public enum Output
+	// {
+		// Text,
+		// Pixel
+	// }
 
-	public void CheckOuputType(Output outputType)
-	{
-		switch (outputType)
-		{
-			case Output.Text:
-				Console.WriteLine("Handling Text output state.");
-				break;
-			case Output.Pixel:
-				Console.WriteLine("Handling Pixel output state.");
-				break;
-			default:
-				throw new ArgumentOutOfRangeException(nameof(outputType), outputType, null);
-		}
-	}
-}
+	// public void CheckOuputType(Output outputType)
+	// {
+		// switch (outputType)
+		// {
+			// case Output.Text:
+				// Console.WriteLine("Handling Text output state.");
+				// break;
+			// case Output.Pixel:
+				// Console.WriteLine("Handling Pixel output state.");
+				// break;
+			// default:
+				// throw new ArgumentOutOfRangeException(nameof(outputType), outputType, null);
+		// }
+	// }
+// }
 
-public class AmazeNew
-{
+// public class AmazeNew
+// {
 
-	public void Runner(int horizontalOriginal, int verticalOriginal, IAmaze.Output getOutputOption)
-	{
-		_ = getOutputOption;
-	}
-}
+	// public void Runner(int horizontalOriginal, int verticalOriginal, IAmaze.Output getOutputOption)
+	// {
+		// _ = getOutputOption;
+	// }
+// }
 
 public abstract class Amaze
 {
@@ -80,12 +80,12 @@ public abstract class Amaze
 
 		
 		// Set default variable values
-		int horizontal = horizontalOriginal;
-		int vertical = verticalOriginal;
+		var horizontal = horizontalOriginal;
+		var vertical = verticalOriginal;
 		if ( horizontal == 1 || vertical == 1) return;
 
-		int[,] widthArray = new int[ horizontal + 1,vertical + 1];
-		int[,] verticalArray = new int[ horizontal + 1,vertical + 1];
+		var widthArray = new int[ horizontal + 1,vertical + 1];
+		var verticalArray = new int[ horizontal + 1,vertical + 1];
 		
 		var q = 0;
 		var z = 0;
