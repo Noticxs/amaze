@@ -17,17 +17,17 @@ public abstract class Amaze
 		// Console.WriteLine(Result);
 	}
 
-	private static void Clear()
+	private static void BlankLine()
 	{
 		Result = "";
 	}
 
-	private static void Println() 
+	private static void NewLine() 
 	{
 		Result += "\n";
 	}
 
-	private static void Print(string text)
+	private static void PrintText(string text)
 	{
 		Result += text;
 	}
@@ -44,9 +44,9 @@ public abstract class Amaze
 
 	public static void Run(int horizontalOriginal, int verticalOriginal) 
 	{
-		Clear();
-		Print("Amazing - Copyright by Creative Computing, Morristown, NJ");
-		Println();
+		BlankLine();
+		PrintText("Amazing - Copyright by Creative Computing, Morristown, NJ");
+		NewLine();
 
 		
 		// Set default variable values
@@ -62,11 +62,11 @@ public abstract class Amaze
 		// 130:170
 		for (var i = 1; i <=  horizontalOriginal; i++)
 		{
-			Print(i == randomInt ? ":  " : ":--");
+			PrintText(i == randomInt ? ":  " : ":--");
 		}
 		// 180
-		Print(":");
-		Println();
+		PrintText(":");
+		NewLine();
 
 		// 190
 		var c = 1;
@@ -562,16 +562,16 @@ public abstract class Amaze
 		// 1200:
 		for (var j = 1; j <= verticalOriginal; j++) 
 		{
-			Print("I");        // 1210
+			PrintText("I");        // 1210
 
 			for (var i = 1; i <=  horizontalOriginal; i++)
 			{
-				Print(verticalArray[i, j] >= 2 ? "   " : "  I"); // 1260
+				PrintText(verticalArray[i, j] >= 2 ? "   " : "  I"); // 1260
 				// 1240
 			}
 
-			Print(" ");   // 1280
-			Println();
+			PrintText(" ");   // 1280
+			NewLine();
 
 			for (var i = 1; i <=  horizontalOriginal; i++)
 			{
@@ -580,16 +580,16 @@ public abstract class Amaze
 					case 0:
 					// 1310, 1340
 					case 2:
-						Print(":--");   // 1300, 1340
+						PrintText(":--");   // 1300, 1340
 						break;
 					default:
-						Print(":  "); // 1320
+						PrintText(":  "); // 1320
 						break;
 				}
 			}
 
-			Print(":");    // 1360
-			Println();
+			PrintText(":");    // 1360
+			NewLine();
 		}
 	}
 }
