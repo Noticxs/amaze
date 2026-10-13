@@ -14,7 +14,7 @@ public abstract class Amaze
 	public static void Main(string[] args)
 	{
 		Run(int.Parse(args[0]),int.Parse(args[1]));
-		Console.WriteLine(Result);
+		// Console.WriteLine(Result);
 	}
 
 	private static void Clear()
