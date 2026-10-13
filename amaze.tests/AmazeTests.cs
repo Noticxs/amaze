@@ -1,3 +1,5 @@
+using amaze_new;
+
 namespace amaze.test;
 
 [TestFixture]
@@ -54,6 +56,9 @@ I                 I  I     I     I           I
         
         System.Console.WriteLine(Amaze.Result);
         
+        var generateMaze = new IAmazeNew();
+        generateMaze.Runner(90, 90, IAmazeNew.Output.Text);
+        
         Assert.That(Amaze.Result, Is.EqualTo(expected), "Should have the maze that was expected");
     }
 
@@ -73,16 +78,15 @@ I  I     I  I
 I        I  I 
 :--:--:--:  :
 ";
-        /* GOAL -> simplify this code out
-         *
-         * Amaze.RandomSeed = new Random(100);
-         * Amaze.Runner(4, 5);
+        // GOAL -> simplify this code out
         
-         * System.Console.WriteLine(Amaze.Result);
-        */
+        Amaze.RandomSeed = new Random(100);
+        Amaze.Runner(4, 5);
         
-        var generateMaze = new IOutputable();
-        generateMaze.Runner(90, 90, IOutputable.Output.Text);
+        System.Console.WriteLine(Amaze.Result);
+        
+        var generateMaze = new IAmazeNew();
+        generateMaze.Runner(90, 90, IAmazeNew.Output.Text);
 
         Assert.That(Amaze.Result, Is.EqualTo(expected), "Should have the maze that was expected");
     }

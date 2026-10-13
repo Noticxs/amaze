@@ -1,17 +1,15 @@
 // using System
 
-using System.Reflection.Metadata;
+namespace amaze_new;
 
-public class IOutputable
+public class IAmazeNew
 {
-	public static Random RandomSeed { get; set; } = new Random(0);
-	
 	public enum Output
 	{
 		Text,
 		Pixel
 	}
-	
+
 	public void Runner(int horizontalOriginal, int verticalOriginal, Output getOutputOption)
 	{
 		switch (getOutputOption)
@@ -31,6 +29,7 @@ public class IOutputable
 public class Amaze
 {
 	private static int Target { get; set; } = 0;
+	public static Random RandomSeed { get; set; } = new Random(0);
 	public static string Result = "";
 
 	public static void Main(string[] args)
