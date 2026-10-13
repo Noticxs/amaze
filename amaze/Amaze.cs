@@ -31,20 +31,20 @@ public class AmazeNew
 
 	public void Runner(int horizontalOriginal, int verticalOriginal, IAmaze.Output getOutputOption)
 	{
-		var output = getOutputOption;
+		_ = getOutputOption;
 	}
 }
 
-public class Amaze
+public abstract class Amaze
 {
-	private static int Target { get; set; } = 0;
+	private static int Target { get; set; }
 	public static Random RandomSeed { get; set; } = new Random(0);
 	public static string Result = "";
 
 	public static void Main(string[] args)
 	{
 		Runner(int.Parse(args[0]),int.Parse(args[1]));
-		System.Console.WriteLine(Result);
+		Console.WriteLine(Result);
 	}
 
 	private static void Clear()
@@ -87,17 +87,14 @@ public class Amaze
 		int[,] widthArray = new int[ horizontal + 1,vertical + 1];
 		int[,] verticalArray = new int[ horizontal + 1,vertical + 1];
 		
-		int q = 0;
-		int z = 0;
-		int randomInt = Random( horizontal);
+		var q = 0;
+		var z = 0;
+		var randomInt = Random( horizontal);
 
 		// 130:170
-		for (int i = 1; i <=  horizontal; i++) 
+		for (var i = 1; i <=  horizontal; i++)
 		{
-			if (i == randomInt)
-				Print(":  ");
-			else
-				Print(":--");
+			Print(i == randomInt ? ":  " : ":--");
 		}
 		// 180
 		Print(":");
@@ -118,16 +115,10 @@ public class Amaze
 			switch (Target) 
 			{
 				case 210:
-					if (r !=  horizontal)
-						GotoLine(250);
-					else
-						GotoLine(220);
+					GotoLine(r != horizontal ? 250 : 220);
 					continue;
 				case 220:
-					if (s != vertical)
-						GotoLine(240);
-					else
-						GotoLine(230);
+					GotoLine(s != vertical ? 240 : 230);
 					continue;
 				case 230:
 					r = 1;
@@ -150,379 +141,338 @@ public class Amaze
 						GotoLine(270);
 					continue;
 				case 270:
-					if (r - 1 == 0)
-						GotoLine(600);
-					else
-						GotoLine(280);
+					GotoLine(r - 1 == 0 ? 600 : 280);
 					continue;
 				case 280:
-					if (widthArray[r - 1,s] != 0)
-						GotoLine(600);
-					else
-						GotoLine(290);
+					GotoLine(widthArray[r - 1, s] != 0 ? 600 : 290);
 					continue;
 				case 290:
-					if (s - 1 == 0)
-						GotoLine(430);
-					else
-						GotoLine(300);
+					GotoLine(s - 1 == 0 ? 430 : 300);
 					continue;
 				case 300:
-					if (widthArray[r,s - 1] != 0)
-						GotoLine(430);
-					else
-						GotoLine(310);
+					GotoLine(widthArray[r, s - 1] != 0 ? 430 : 310);
 					continue;
 				case 310:
-					if (r ==  horizontal)
-						GotoLine(350);
-					else
-						GotoLine(320);
+					GotoLine(r == horizontal ? 350 : 320);
 					continue;
 				case 320:
-					if (widthArray[r + 1,s] != 0)
-						GotoLine(350);
-					else
-						GotoLine(330);
+					GotoLine(widthArray[r + 1, s] != 0 ? 350 : 330);
 					continue;
 				case 330:
 					randomInt = Random(3);
 					GotoLine(340);
 					continue;
 				case 340:
-					if (randomInt == 1)
-						GotoLine(940);
-					else if (randomInt == 2)
-						GotoLine(980);
-					else if (randomInt == 3)
-						GotoLine(1020);
-					else
-						GotoLine(350);
+					switch (randomInt)
+					{
+						case 1:
+							GotoLine(940);
+							break;
+						case 2:
+							GotoLine(980);
+							break;
+						case 3:
+							GotoLine(1020);
+							break;
+						default:
+							GotoLine(350);
+							break;
+					}
 					continue;
 				case 350:
-					if (s != vertical)
-						GotoLine(380);
-					else
-						GotoLine(360);
+					GotoLine(s != vertical ? 380 : 360);
 					continue;
 				case 360:
-					if (z == 1)
-						GotoLine(410);
-					else
-						GotoLine(370);
+					GotoLine(z == 1 ? 410 : 370);
 					continue;
 				case 370:
 					q = 1;
 					GotoLine(390);
 					continue;
 				case 380:
-					if (widthArray[r,s + 1] != 0)
-						GotoLine(410);
-					else
-						GotoLine(390);
+					GotoLine(widthArray[r, s + 1] != 0 ? 410 : 390);
 					continue;
 				case 390:
 					randomInt = Random(3);
 					GotoLine(400);
 					continue;
 				case 400:
-					if (randomInt == 1)
-						GotoLine(940);
-					else if (randomInt == 2)
-						GotoLine(980);
-					else if (randomInt == 3)
-						GotoLine(1090);
-					else
-						GotoLine(410);
+					switch (randomInt)
+					{
+						case 1:
+							GotoLine(940);
+							break;
+						case 2:
+							GotoLine(980);
+							break;
+						case 3:
+							GotoLine(1090);
+							break;
+						default:
+							GotoLine(410);
+							break;
+					}
 					continue;
 				case 410:
 					randomInt = Random(2);
 					GotoLine(420);
 					continue;
 				case 420:
-					if (randomInt == 1)
-						GotoLine(940);
-					else if (randomInt == 2)
-						GotoLine(980);
-					else
-						GotoLine(430);
+					switch (randomInt)
+					{
+						case 1:
+							GotoLine(940);
+							break;
+						case 2:
+							GotoLine(980);
+							break;
+						default:
+							GotoLine(430);
+							break;
+					}
 					continue;
 				case 430:
-					if (r ==  horizontal)
-						GotoLine(530);
-					else
-						GotoLine(440);
+					GotoLine(r == horizontal ? 530 : 440);
 					continue;
 				case 440:
-					if (widthArray[r + 1,s] != 0)
-						GotoLine(530);
-					else
-						GotoLine(450);
+					GotoLine(widthArray[r + 1, s] != 0 ? 530 : 450);
 					continue;
 				case 450:
-					if (s != vertical)
-						GotoLine(480);
-					else
-						GotoLine(460);
+					GotoLine(s != vertical ? 480 : 460);
 					continue;
 				case 460:
-					if (z == 1)
-						GotoLine(510);
-					else
-						GotoLine(470);
+					GotoLine(z == 1 ? 510 : 470);
 					continue;
 				case 470:
 					q = 1;
 					GotoLine(490);
 					continue;
 				case 480:
-					if (widthArray[r,s + 1] != 0)
-						GotoLine(510);
-					else
-						GotoLine(490);
+					GotoLine(widthArray[r, s + 1] != 0 ? 510 : 490);
 					continue;
 				case 490:
 					randomInt = Random(3);
 					GotoLine(500);
 					continue;
 				case 500:
-					if (randomInt == 1)
-						GotoLine(940);
-					else if (randomInt == 2)
-						GotoLine(1020);
-					else if (randomInt == 3)
-						GotoLine(1090);
-					else
-						GotoLine(510);
+					switch (randomInt)
+					{
+						case 1:
+							GotoLine(940);
+							break;
+						case 2:
+							GotoLine(1020);
+							break;
+						case 3:
+							GotoLine(1090);
+							break;
+						default:
+							GotoLine(510);
+							break;
+					}
 					continue;
 				case 510:
 					randomInt = Random(2);
 					GotoLine(520);
 					continue;
 				case 520:
-					if (randomInt == 1)
-						GotoLine(940);
-					else if (randomInt == 2)
-						GotoLine(1020);
-					else
-						GotoLine(530);
+					switch (randomInt)
+					{
+						case 1:
+							GotoLine(940);
+							break;
+						case 2:
+							GotoLine(1020);
+							break;
+						default:
+							GotoLine(530);
+							break;
+					}
 					continue;
 				case 530:
-					if (s != vertical)
-						GotoLine(560);
-					else
-						GotoLine(540);
+					GotoLine(s != vertical ? 560 : 540);
 					continue;
 				case 540:
-					if (z == 1)
-						GotoLine(590);
-					else
-						GotoLine(550);
+					GotoLine(z == 1 ? 590 : 550);
 					continue;
 				case 550:
 					q = 1;
 					GotoLine(570);
 					continue;
 				case 560:
-					if (widthArray[r,s + 1] != 0)
-						GotoLine(590);
-					else
-						GotoLine(570);
+					GotoLine(widthArray[r, s + 1] != 0 ? 590 : 570);
 					continue;
 				case 570:
 					randomInt = Random(2);
 					GotoLine(580);
 					continue;
 				case 580:
-					if (randomInt == 1)
-						GotoLine(940);
-					else if (randomInt == 2)
-						GotoLine(1090);
-					else
-						GotoLine(590);
+					switch (randomInt)
+					{
+						case 1:
+							GotoLine(940);
+							break;
+						case 2:
+							GotoLine(1090);
+							break;
+						default:
+							GotoLine(590);
+							break;
+					}
 					continue;
 				case 590:
 					GotoLine(940);
 					continue;
 				case 600:
-					if (s - 1 == 0)
-						GotoLine(790);
-					else
-						GotoLine(610);
+					GotoLine(s - 1 == 0 ? 790 : 610);
 					continue;
 				case 610:
-					if (widthArray[r,s - 1] != 0)
-						GotoLine(790);
-					else
-						GotoLine(620);
+					GotoLine(widthArray[r, s - 1] != 0 ? 790 : 620);
 					continue;
 				case 620:
-					if (r ==  horizontal)
-						GotoLine(720);
-					else
-						GotoLine(630);
+					GotoLine(r == horizontal ? 720 : 630);
 					continue;
 				case 630:
-					if (widthArray[r + 1,s] != 0)
-						GotoLine(720);
-					else
-						GotoLine(640);
+					GotoLine(widthArray[r + 1, s] != 0 ? 720 : 640);
 					continue;
 				case 640:
-					if (s != vertical)
-						GotoLine(670);
-					else
-						GotoLine(650);
+					GotoLine(s != vertical ? 670 : 650);
 					continue;
 				case 650:
-					if (z == 1)
-						GotoLine(700);
-					else
-						GotoLine(660);
+					GotoLine(z == 1 ? 700 : 660);
 					continue;
 				case 660:
 					q = 1;
 					GotoLine(680);
 					continue;
 				case 670:
-					if (widthArray[r,s + 1] != 0)
-						GotoLine(700);
-					else
-						GotoLine(680);
+					GotoLine(widthArray[r, s + 1] != 0 ? 700 : 680);
 					continue;
 				case 680:
 					randomInt = Random(3);
 					GotoLine(690);
 					continue;
 				case 690:
-					if (randomInt == 1)
-						GotoLine(980);
-					else if (randomInt == 2)
-						GotoLine(1020);
-					else if (randomInt == 3)
-						GotoLine(1090);
-					else
-						GotoLine(700);
+					switch (randomInt)
+					{
+						case 1:
+							GotoLine(980);
+							break;
+						case 2:
+							GotoLine(1020);
+							break;
+						case 3:
+							GotoLine(1090);
+							break;
+						default:
+							GotoLine(700);
+							break;
+					}
 					continue;
 				case 700:
 					randomInt = Random(2);
 					GotoLine(710);
 					continue;
 				case 710:
-					if (randomInt == 1)
-						GotoLine(980);
-					else if (randomInt == 2)
-						GotoLine(1020);
-					else
-						GotoLine(720);
+					switch (randomInt)
+					{
+						case 1:
+							GotoLine(980);
+							break;
+						case 2:
+							GotoLine(1020);
+							break;
+						default:
+							GotoLine(720);
+							break;
+					}
 					continue;
 				case 720:
-					if (s != vertical)
-						GotoLine(750);
-					else
-						GotoLine(730);
+					GotoLine(s != vertical ? 750 : 730);
 					continue;
 				case 730:
-					if (z == 1)
-						GotoLine(780);
-					else
-						GotoLine(740);
+					GotoLine(z == 1 ? 780 : 740);
 					continue;
 				case 740:
 					q = 1;
 					GotoLine(760);
 					continue;
 				case 750:
-					if (widthArray[r,s + 1] != 0)
-						GotoLine(780);
-					else
-						GotoLine(760);
+					GotoLine(widthArray[r, s + 1] != 0 ? 780 : 760);
 					continue;
 				case 760:
 					randomInt = Random(2);
 					GotoLine(770);
 					continue;
 				case 770:
-					if (randomInt == 1)
-						GotoLine(980);
-					else if (randomInt == 2)
-						GotoLine(1090);
-					else
-						GotoLine(780);
+					switch (randomInt)
+					{
+						case 1:
+							GotoLine(980);
+							break;
+						case 2:
+							GotoLine(1090);
+							break;
+						default:
+							GotoLine(780);
+							break;
+					}
 					continue;
 				case 780:
 					GotoLine(980);
 					continue;
 				case 790:
-					if (r ==  horizontal)
-						GotoLine(880);
-					else
-						GotoLine(800);
+					GotoLine(r == horizontal ? 880 : 800);
 					continue;
 				case 800:
-					if (widthArray[r + 1,s] != 0)
-						GotoLine(880);
-					else
-						GotoLine(810);
+					GotoLine(widthArray[r + 1, s] != 0 ? 880 : 810);
 					continue;
 				case 810:
-					if (s != vertical)
-						GotoLine(840);
-					else
-						GotoLine(820);
+					GotoLine(s != vertical ? 840 : 820);
 					continue;
 				case 820:
-					if (z == 1)
-						GotoLine(870);
-					else
-						GotoLine(830);
+					GotoLine(z == 1 ? 870 : 830);
 					continue;
 				case 830:
 					q = 1;
 					GotoLine(990);
 					continue;
 				case 840:
-					if (widthArray[r,s + 1] != 0)
-						GotoLine(870);
-					else
-						GotoLine(850);
+					GotoLine(widthArray[r, s + 1] != 0 ? 870 : 850);
 					continue;
 				case 850:
 					randomInt = Random(2);
 					GotoLine(860);
 					continue;
 				case 860:
-					if (randomInt == 1)
-						GotoLine(1020);
-					else if (randomInt == 2)
-						GotoLine(1090);
-					else
-						GotoLine(870);
+					switch (randomInt)
+					{
+						case 1:
+							GotoLine(1020);
+							break;
+						case 2:
+							GotoLine(1090);
+							break;
+						default:
+							GotoLine(870);
+							break;
+					}
 					continue;
 				case 870:
 					GotoLine(1020);
 					continue;
 				case 880:
-					if (s != vertical)
-						GotoLine(910);
-					else
-						GotoLine(890);
+					GotoLine(s != vertical ? 910 : 890);
 					continue;
 				case 890:
-					if (z == 1)
-						GotoLine(930);
-					else
-						GotoLine(900);
+					GotoLine(z == 1 ? 930 : 900);
 					continue;
 				case 900:
 					q = 1;
 					GotoLine(920);
 					continue;
 				case 910:
-					if (widthArray[r,s + 1] != 0)
-						GotoLine(930);
-					else
-						GotoLine(920);
+					GotoLine(widthArray[r, s + 1] != 0 ? 930 : 920);
 					continue;
 				case 920:
 					GotoLine(1090);
@@ -541,10 +491,7 @@ public class Amaze
 					GotoLine(960);
 					continue;
 				case 960:
-					if (c ==  horizontal * vertical + 1)
-						GotoLine(1200);
-					else
-						GotoLine(970);
+					GotoLine(c == horizontal * vertical + 1 ? 1200 : 970);
 					continue;
 				case 970:
 					q = 0;
@@ -561,10 +508,7 @@ public class Amaze
 				case 1000:
 					verticalArray[r,s - 1] = 1;
 					s--;
-					if (c ==  horizontal * vertical + 1)
-						GotoLine(1200);
-					else
-						GotoLine(1010);
+					GotoLine(c == horizontal * vertical + 1 ? 1200 : 1010);
 					continue;
 				case 1010:
 					q = 0;
@@ -576,10 +520,7 @@ public class Amaze
 					continue;
 				case 1030:
 					c++;
-					if (verticalArray[r,s] == 0)
-						GotoLine(1050);
-					else
-						GotoLine(1040);
+					GotoLine(verticalArray[r, s] == 0 ? 1050 : 1040);
 					continue;
 				case 1040:
 					verticalArray[r,s] = 3;
@@ -594,27 +535,18 @@ public class Amaze
 					GotoLine(1070);
 					continue;
 				case 1070:
-					if (c ==  horizontal * vertical + 1)
-						GotoLine(1200);
-					else
-						GotoLine(1080);
+					GotoLine(c == horizontal * vertical + 1 ? 1200 : 1080);
 					continue;
 				case 1080:
 					GotoLine(600);
 					continue;
 				case 1090:
-					if (q == 1)
-						GotoLine(1150);
-					else
-						GotoLine(1100);
+					GotoLine(q == 1 ? 1150 : 1100);
 					continue;
 				case 1100:
 					widthArray[r,s + 1] = c;
 					c++;
-					if (verticalArray[r,s] == 0)
-						GotoLine(1120);
-					else
-						GotoLine(1110);
+					GotoLine(verticalArray[r, s] == 0 ? 1120 : 1110);
 					continue;
 				case 1110:
 					verticalArray[r,s] = 3;
@@ -626,10 +558,7 @@ public class Amaze
 					continue;
 				case 1130:
 					s++;
-					if (c == vertical *  horizontal + 1)
-						GotoLine(1200);
-					else
-						GotoLine(1140);
+					GotoLine(c == vertical * horizontal + 1 ? 1200 : 1140);
 					continue;
 				case 1140:
 					GotoLine(270);
@@ -639,10 +568,7 @@ public class Amaze
 					GotoLine(1160);
 					continue;
 				case 1160:
-					if (verticalArray[r,s] == 0)
-						GotoLine(1180);
-					else
-						GotoLine(1170);
+					GotoLine(verticalArray[r, s] == 0 ? 1180 : 1170);
 					continue;
 				case 1170:
 					verticalArray[r,s] = 3;
@@ -667,29 +593,32 @@ public class Amaze
 		}
 
 		// 1200:
-		for (int j = 1; j <= vertical; j++) 
+		for (var j = 1; j <= vertical; j++) 
 		{
 			Print("I");        // 1210
 
-			for (int i = 1; i <=  horizontal; i++) 
+			for (var i = 1; i <=  horizontal; i++)
 			{
-				if (verticalArray[i,j] >= 2)
-					Print("   ");  // 1240
-				else
-					Print("  I");  // 1260
+				Print(verticalArray[i, j] >= 2 ? "   " : "  I"); // 1260
+				// 1240
 			}
 
 			Print(" ");   // 1280
 			Println();
 
-			for (int i = 1; i <=  horizontal; i++) 
+			for (var i = 1; i <=  horizontal; i++)
 			{
-				if (verticalArray[i,j] == 0)
-					Print(":--");   // 1300, 1340
-				else if (verticalArray[i,j] == 2)
-					Print(":--");  // 1310, 1340
-				else
-					Print(":  "); // 1320
+				switch (verticalArray[i,j])
+				{
+					case 0:
+					// 1310, 1340
+					case 2:
+						Print(":--");   // 1300, 1340
+						break;
+					default:
+						Print(":  "); // 1320
+						break;
+				}
 			}
 
 			Print(":");    // 1360

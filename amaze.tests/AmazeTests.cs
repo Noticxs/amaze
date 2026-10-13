@@ -1,6 +1,6 @@
 using amaze_new;
 
-namespace amaze.test;
+namespace amaze_new_new.tests;
 
 [TestFixture]
 public class AmazeTests
@@ -54,7 +54,7 @@ I                 I  I     I     I           I
         Amaze.RandomSeed = new Random(0);
         Amaze.Runner(15, 20);
         
-        System.Console.WriteLine(Amaze.Result);
+        Console.WriteLine(Amaze.Result);
         
         var generateMaze = new AmazeNew();
         generateMaze.Runner(90, 90, IAmaze.Output.Text);
@@ -83,7 +83,7 @@ I        I  I
         Amaze.RandomSeed = new Random(100);
         Amaze.Runner(4, 5);
         
-        System.Console.WriteLine(Amaze.Result);
+        Console.WriteLine(Amaze.Result);
         
         var generateMaze = new AmazeNew();
         generateMaze.Runner(90, 90, IAmaze.Output.Text);
