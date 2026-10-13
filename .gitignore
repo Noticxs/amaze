@@ -4,3 +4,4 @@ amaze/obj
 amaze.tests/bin
 amaze.tests/obj
 .DS_Store
+.old/

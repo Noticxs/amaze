@@ -1,8 +1,36 @@
-using System;
+// using System
+
+using System.Reflection.Metadata;
+
+public class IOutputable
+{
+	public static Random RandomSeed { get; set; } = new Random(0);
+	
+	public enum Output
+	{
+		Text,
+		Pixel
+	}
+	
+	public void Runner(int horizontalOriginal, int verticalOriginal, Output getOutputOption)
+	{
+		switch (getOutputOption)
+		{
+			case Output.Text:
+				Console.WriteLine("Handling Text output state.");
+				break;
+			case Output.Pixel:
+				Console.WriteLine("Handling Pixel output state.");
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(getOutputOption), getOutputOption, null);
+		}
+	}
+}
+
 public class Amaze
 {
 	private static int Target { get; set; } = 0;
-	public static Random RandomSeed { get; set; } = new Random(0);
 	public static string Result = "";
 
 	public static void Main(string[] args)

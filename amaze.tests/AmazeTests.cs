@@ -1,4 +1,4 @@
-namespace amaze_new_new.test;
+namespace amaze.test;
 
 [TestFixture]
 public class AmazeTests
@@ -73,10 +73,16 @@ I  I     I  I
 I        I  I 
 :--:--:--:  :
 ";
-        Amaze.RandomSeed = new Random(100);
-        Amaze.Runner(4, 5);
+        /* GOAL -> simplify this code out
+         *
+         * Amaze.RandomSeed = new Random(100);
+         * Amaze.Runner(4, 5);
         
-        System.Console.WriteLine(Amaze.Result);
+         * System.Console.WriteLine(Amaze.Result);
+        */
+        
+        var generateMaze = new IOutputable();
+        generateMaze.Runner(90, 90, IOutputable.Output.Text);
 
         Assert.That(Amaze.Result, Is.EqualTo(expected), "Should have the maze that was expected");
     }
