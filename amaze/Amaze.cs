@@ -44,6 +44,7 @@ public abstract class Amaze
 	
 	public enum ProcessState {
 		Exit = 0,
+		Error = 404,
 		DrawWall = 100,
 		DrawEntrance = 270,
 		Finish = 500
@@ -87,7 +88,7 @@ public abstract class Amaze
 
 		while (true)
 		{
-			pp
+			break;
 		}
 		
 		while (Target != -1) 
