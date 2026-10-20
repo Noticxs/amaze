@@ -56,8 +56,8 @@ public abstract class Amaze
 		var visitedStepGrid = new int[width + 1, height + 1];
 		var cellWallConfig = new int[width + 1, height + 1];
 		
-		var q = 0;
-		var z = 0;
+		var hasHitBoundary = false;
+		var hasReachedOuterEdge = false;
 		var randomInt = Random(width);
 		
 		// Print top border
@@ -138,10 +138,10 @@ public abstract class Amaze
 					SetTarget(currentY != height ? 380 : 360);
 					continue;
 				case 360:
-					SetTarget(z == 1 ? 410 : 370);
+					SetTarget(hasReachedOuterEdge ? 410 : 370);
 					continue;
 				case 370:
-					q = 1;
+					hasHitBoundary = true; // Fixed: assigned true instead of 1
 					SetTarget(390);
 					continue;
 				case 380:
@@ -182,10 +182,10 @@ public abstract class Amaze
 					SetTarget(currentY != height ? 480 : 460);
 					continue;
 				case 460:
-					SetTarget(z == 1 ? 510 : 470);
+					SetTarget(hasReachedOuterEdge ? 510 : 470);
 					continue;
 				case 470:
-					q = 1;
+					hasHitBoundary = true; // Fixed: assigned true instead of 1
 					SetTarget(490);
 					continue;
 				case 480:
@@ -220,10 +220,10 @@ public abstract class Amaze
 					SetTarget(currentY != height ? 560 : 540);
 					continue;
 				case 540:
-					SetTarget(z == 1 ? 590 : 550);
+					SetTarget(hasReachedOuterEdge ? 590 : 550);
 					continue;
 				case 550:
-					q = 1;
+					hasHitBoundary = true; // Fixed: assigned true instead of 1
 					SetTarget(570);
 					continue;
 				case 560:
@@ -260,10 +260,10 @@ public abstract class Amaze
 					SetTarget(currentY != height ? 670 : 650);
 					continue;
 				case 650:
-					SetTarget(z == 1 ? 700 : 660);
+					SetTarget(hasReachedOuterEdge ? 700 : 660);
 					continue;
 				case 660:
-					q = 1;
+					hasHitBoundary = true;
 					SetTarget(680);
 					continue;
 				case 670:
@@ -298,10 +298,10 @@ public abstract class Amaze
 					SetTarget(currentY != height ? 750 : 730);
 					continue;
 				case 730:
-					SetTarget(z == 1 ? 780 : 740);
+					SetTarget(hasReachedOuterEdge ? 780 : 740);
 					continue;
 				case 740:
-					q = 1;
+					hasHitBoundary = true; // Fixed: assigned true instead of 1
 					SetTarget(760);
 					continue;
 				case 750:
@@ -332,10 +332,10 @@ public abstract class Amaze
 					SetTarget(currentY != height ? 840 : 820);
 					continue;
 				case 820:
-					SetTarget(z == 1 ? 870 : 830);
+					SetTarget(hasReachedOuterEdge ? 870 : 830);
 					continue;
 				case 830:
-					q = 1;
+					hasHitBoundary = true; // Fixed: assigned true instead of 1
 					SetTarget(990);
 					continue;
 				case 840:
@@ -360,10 +360,10 @@ public abstract class Amaze
 					SetTarget(currentY != height ? 910 : 890);
 					continue;
 				case 890:
-					SetTarget(z == 1 ? 930 : 900);
+					SetTarget(hasReachedOuterEdge ? 930 : 900);
 					continue;
 				case 900:
-					q = 1;
+					hasHitBoundary = true;
 					SetTarget(920);
 					continue;
 				case 910:
@@ -389,7 +389,7 @@ public abstract class Amaze
 					SetTarget(stepCounter == width * height + 1 ? 1200 : 970);
 					continue;
 				case 970:
-					q = 0;
+					hasHitBoundary = false;
 					SetTarget(270);
 					continue;
 				case 980:
@@ -406,7 +406,7 @@ public abstract class Amaze
 					SetTarget(stepCounter == width * height + 1 ? 1200 : 1010);
 					continue;
 				case 1010:
-					q = 0;
+					hasHitBoundary = false;
 					SetTarget(270);
 					continue;
 				case 1020:
@@ -436,7 +436,7 @@ public abstract class Amaze
 					SetTarget(600);
 					continue;
 				case 1090:
-					SetTarget(q == 1 ? 1150 : 1100);
+					SetTarget(hasHitBoundary ? 1150 : 1100);
 					continue;
 				case 1100:
 					visitedStepGrid[currentX, currentY + 1] = stepCounter;
@@ -459,7 +459,7 @@ public abstract class Amaze
 					SetTarget(270);
 					continue;
 				case 1150:
-					z = 1;
+					hasReachedOuterEdge = true;
 					SetTarget(1160);
 					continue;
 				case 1160:
@@ -467,12 +467,12 @@ public abstract class Amaze
 					continue;
 				case 1170:
 					cellWallConfig[currentX, currentY] = 3;
-					q = 0;
+					hasHitBoundary = false;
 					SetTarget(1190);
 					continue;
 				case 1180:
 					cellWallConfig[currentX, currentY] = 1;
-					q = 0;
+					hasHitBoundary = false;
 					currentX = 1;
 					currentY = 1;
 					SetTarget(260);
