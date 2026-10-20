@@ -8,7 +8,6 @@ public abstract class Amaze
 	private const string VerticalInternalWall = ":  ";
 	private const string OuterWall = "I";
 	
-	
 	private static int Target { get; set; }
 	public static Random RandomSeed { get; set; } = new Random(0);
 
@@ -18,8 +17,7 @@ public abstract class Amaze
 
 	public static void Main(string[] args)
 	{
-		Run(int.Parse(args[0]),int.Parse(args[1]));
-		// Console.WriteLine(Result);
+		Run(int.Parse(args[0]), int.Parse(args[1]));
 	}
 
 	private static void BlankLine()
@@ -42,7 +40,7 @@ public abstract class Amaze
 		return (int) (count * RandomSeed.NextDouble()) + 1;
 	}
 
-	private static void GotoLine(int lineNumber) 
+	private static void SetTarget(int lineNumber) 
 	{
 		Target = lineNumber;
 	}
@@ -52,508 +50,435 @@ public abstract class Amaze
 		BlankLine();
 		PrintText("Amazing - Copyright by Creative Computing, Morristown, NJ");
 		NewLine();
-
 		
-		// Set default variable values
-		if ( width == 1 || height == 1) return;
-
-		var widthArray = new int[ width + 1,height + 1];
-		var verticalArray = new int[ width + 1,height + 1];
+		if (width == 1 || height == 1) return;
+		
+		var visitedStepGrid = new int[width + 1, height + 1];
+		var cellWallConfig = new int[width + 1, height + 1];
 		
 		var q = 0;
 		var z = 0;
-		var randomInt = Random( width);
+		var randomInt = Random(width);
 		
-		// 130:170
-		for (var i = 1; i <=  width; i++)
+		// Print top border
+		for (var i = 1; i <= width; i++)
 		{
 			PrintText(i == randomInt ? VerticalInternalWall : HorizontalInternalWall);
 		}
-		// 180
 		PrintText(":");
 		NewLine();
 
-		// 190
-		var counter = 1;
-		widthArray[randomInt,1] = counter;
-		counter++;
+		var stepCounter = 1;
+		visitedStepGrid[randomInt, 1] = stepCounter;
+		stepCounter++;
 
-		// 200
-		var randomInteger = randomInt;
-		var s = 1;
-		GotoLine(270);
+		var currentX = randomInt;
+		var currentY = 1;
+		SetTarget(270);
 
 		while (Target != -1) 
 		{
 			switch (Target) 
 			{
 				case 210:
-					GotoLine(randomInteger != width ? 250 : 220);
+					SetTarget(currentX != width ? 250 : 220);
 					continue;
 				case 220:
-					GotoLine(s != height ? 240 : 230);
+					SetTarget(currentY != height ? 240 : 230);
 					continue;
 				case 230:
-					randomInteger = 1;
-					s = 1;
-					GotoLine(260);
+					currentX = 1;
+					currentY = 1;
+					SetTarget(260);
 					continue;
 				case 240:
-					randomInteger = 1;
-					s++;
-					GotoLine(260);
+					currentX = 1;
+					currentY++;
+					SetTarget(260);
 					continue;
 				case 250:
-					randomInteger++;
-					GotoLine(260);
+					currentX++;
+					SetTarget(260);
 					continue;
 				case 260:
-					GotoLine(widthArray[randomInteger, s] == 0 ? 210 : 270);
+					SetTarget(visitedStepGrid[currentX, currentY] == 0 ? 210 : 270);
 					continue;
 				case 270:
-					GotoLine(randomInteger - 1 == 0 ? 600 : 280);
+					SetTarget(currentX - 1 == 0 ? 600 : 280);
 					continue;
 				case 280:
-					GotoLine(widthArray[randomInteger - 1, s] != 0 ? 600 : 290);
+					SetTarget(visitedStepGrid[currentX - 1, currentY] != 0 ? 600 : 290);
 					continue;
 				case 290:
-					GotoLine(s - 1 == 0 ? 430 : 300);
+					SetTarget(currentY - 1 == 0 ? 430 : 300);
 					continue;
 				case 300:
-					GotoLine(widthArray[randomInteger, s - 1] != 0 ? 430 : 310);
+					SetTarget(visitedStepGrid[currentX, currentY - 1] != 0 ? 430 : 310);
 					continue;
 				case 310:
-					GotoLine(randomInteger == width ? 350 : 320);
+					SetTarget(currentX == width ? 350 : 320);
 					continue;
 				case 320:
-					GotoLine(widthArray[randomInteger + 1, s] != 0 ? 350 : 330);
+					SetTarget(visitedStepGrid[currentX + 1, currentY] != 0 ? 350 : 330);
 					continue;
 				case 330:
 					randomInt = Random(3);
-					GotoLine(340);
+					SetTarget(340);
 					continue;
 				case 340:
 					switch (randomInt)
 					{
-						case 1:
-							GotoLine(940);
-							break;
-						case 2:
-							GotoLine(980);
-							break;
-						case 3:
-							GotoLine(1020);
-							break;
-						default:
-							GotoLine(350);
-							break;
+						case 1: SetTarget(940); break;
+						case 2: SetTarget(980); break;
+						case 3: SetTarget(1020); break;
+						default: SetTarget(350); break;
 					}
 					continue;
 				case 350:
-					GotoLine(s != height ? 380 : 360);
+					SetTarget(currentY != height ? 380 : 360);
 					continue;
 				case 360:
-					GotoLine(z == 1 ? 410 : 370);
+					SetTarget(z == 1 ? 410 : 370);
 					continue;
 				case 370:
 					q = 1;
-					GotoLine(390);
+					SetTarget(390);
 					continue;
 				case 380:
-					GotoLine(widthArray[randomInteger, s + 1] != 0 ? 410 : 390);
+					SetTarget(visitedStepGrid[currentX, currentY + 1] != 0 ? 410 : 390);
 					continue;
 				case 390:
 					randomInt = Random(3);
-					GotoLine(400);
+					SetTarget(400);
 					continue;
 				case 400:
 					switch (randomInt)
 					{
-						case 1:
-							GotoLine(940);
-							break;
-						case 2:
-							GotoLine(980);
-							break;
-						case 3:
-							GotoLine(1090);
-							break;
-						default:
-							GotoLine(410);
-							break;
+						case 1: SetTarget(940); break;
+						case 2: SetTarget(980); break;
+						case 3: SetTarget(1090); break;
+						default: SetTarget(410); break;
 					}
 					continue;
 				case 410:
 					randomInt = Random(2);
-					GotoLine(420);
+					SetTarget(420);
 					continue;
 				case 420:
 					switch (randomInt)
 					{
-						case 1:
-							GotoLine(940);
-							break;
-						case 2:
-							GotoLine(980);
-							break;
-						default:
-							GotoLine(430);
-							break;
+						case 1: SetTarget(940); break;
+						case 2: SetTarget(980); break;
+						default: SetTarget(430); break;
 					}
 					continue;
 				case 430:
-					GotoLine(randomInteger == width ? 530 : 440);
+					SetTarget(currentX == width ? 530 : 440);
 					continue;
 				case 440:
-					GotoLine(widthArray[randomInteger + 1, s] != 0 ? 530 : 450);
+					SetTarget(visitedStepGrid[currentX + 1, currentY] != 0 ? 530 : 450);
 					continue;
 				case 450:
-					GotoLine(s != height ? 480 : 460);
+					SetTarget(currentY != height ? 480 : 460);
 					continue;
 				case 460:
-					GotoLine(z == 1 ? 510 : 470);
+					SetTarget(z == 1 ? 510 : 470);
 					continue;
 				case 470:
 					q = 1;
-					GotoLine(490);
+					SetTarget(490);
 					continue;
 				case 480:
-					GotoLine(widthArray[randomInteger, s + 1] != 0 ? 510 : 490);
+					SetTarget(visitedStepGrid[currentX, currentY + 1] != 0 ? 510 : 490);
 					continue;
 				case 490:
 					randomInt = Random(3);
-					GotoLine(500);
+					SetTarget(500);
 					continue;
 				case 500:
 					switch (randomInt)
 					{
-						case 1:
-							GotoLine(940);
-							break;
-						case 2:
-							GotoLine(1020);
-							break;
-						case 3:
-							GotoLine(1090);
-							break;
-						default:
-							GotoLine(510);
-							break;
+						case 1: SetTarget(940); break;
+						case 2: SetTarget(1020); break;
+						case 3: SetTarget(1090); break;
+						default: SetTarget(510); break;
 					}
 					continue;
 				case 510:
 					randomInt = Random(2);
-					GotoLine(520);
+					SetTarget(520);
 					continue;
 				case 520:
 					switch (randomInt)
 					{
-						case 1:
-							GotoLine(940);
-							break;
-						case 2:
-							GotoLine(1020);
-							break;
-						default:
-							GotoLine(530);
-							break;
+						case 1: SetTarget(940); break;
+						case 2: SetTarget(1020); break;
+						default: SetTarget(530); break;
 					}
 					continue;
 				case 530:
-					GotoLine(s != height ? 560 : 540);
+					SetTarget(currentY != height ? 560 : 540);
 					continue;
 				case 540:
-					GotoLine(z == 1 ? 590 : 550);
+					SetTarget(z == 1 ? 590 : 550);
 					continue;
 				case 550:
 					q = 1;
-					GotoLine(570);
+					SetTarget(570);
 					continue;
 				case 560:
-					GotoLine(widthArray[randomInteger, s + 1] != 0 ? 590 : 570);
+					SetTarget(visitedStepGrid[currentX, currentY + 1] != 0 ? 590 : 570);
 					continue;
 				case 570:
 					randomInt = Random(2);
-					GotoLine(580);
+					SetTarget(580);
 					continue;
 				case 580:
 					switch (randomInt)
 					{
-						case 1:
-							GotoLine(940);
-							break;
-						case 2:
-							GotoLine(1090);
-							break;
-						default:
-							GotoLine(590);
-							break;
+						case 1: SetTarget(940); break;
+						case 2: SetTarget(1090); break;
+						default: SetTarget(590); break;
 					}
 					continue;
 				case 590:
-					GotoLine(940);
+					SetTarget(940);
 					continue;
 				case 600:
-					GotoLine(s - 1 == 0 ? 790 : 610);
+					SetTarget(currentY - 1 == 0 ? 790 : 610);
 					continue;
 				case 610:
-					GotoLine(widthArray[randomInteger, s - 1] != 0 ? 790 : 620);
+					SetTarget(visitedStepGrid[currentX, currentY - 1] != 0 ? 790 : 620);
 					continue;
 				case 620:
-					GotoLine(randomInteger == width ? 720 : 630);
+					SetTarget(currentX == width ? 720 : 630);
 					continue;
 				case 630:
-					GotoLine(widthArray[randomInteger + 1, s] != 0 ? 720 : 640);
+					SetTarget(visitedStepGrid[currentX + 1, currentY] != 0 ? 720 : 640);
 					continue;
 				case 640:
-					GotoLine(s != height ? 670 : 650);
+					SetTarget(currentY != height ? 670 : 650);
 					continue;
 				case 650:
-					GotoLine(z == 1 ? 700 : 660);
+					SetTarget(z == 1 ? 700 : 660);
 					continue;
 				case 660:
 					q = 1;
-					GotoLine(680);
+					SetTarget(680);
 					continue;
 				case 670:
-					GotoLine(widthArray[randomInteger, s + 1] != 0 ? 700 : 680);
+					SetTarget(visitedStepGrid[currentX, currentY + 1] != 0 ? 700 : 680);
 					continue;
 				case 680:
 					randomInt = Random(3);
-					GotoLine(690);
+					SetTarget(690);
 					continue;
 				case 690:
 					switch (randomInt)
 					{
-						case 1:
-							GotoLine(980);
-							break;
-						case 2:
-							GotoLine(1020);
-							break;
-						case 3:
-							GotoLine(1090);
-							break;
-						default:
-							GotoLine(700);
-							break;
+						case 1: SetTarget(980); break;
+						case 2: SetTarget(1020); break;
+						case 3: SetTarget(1090); break;
+						default: SetTarget(700); break;
 					}
 					continue;
 				case 700:
 					randomInt = Random(2);
-					GotoLine(710);
+					SetTarget(710);
 					continue;
 				case 710:
 					switch (randomInt)
 					{
-						case 1:
-							GotoLine(980);
-							break;
-						case 2:
-							GotoLine(1020);
-							break;
-						default:
-							GotoLine(720);
-							break;
+						case 1: SetTarget(980); break;
+						case 2: SetTarget(1020); break;
+						default: SetTarget(720); break;
 					}
 					continue;
 				case 720:
-					GotoLine(s != height ? 750 : 730);
+					SetTarget(currentY != height ? 750 : 730);
 					continue;
 				case 730:
-					GotoLine(z == 1 ? 780 : 740);
+					SetTarget(z == 1 ? 780 : 740);
 					continue;
 				case 740:
 					q = 1;
-					GotoLine(760);
+					SetTarget(760);
 					continue;
 				case 750:
-					GotoLine(widthArray[randomInteger, s + 1] != 0 ? 780 : 760);
+					SetTarget(visitedStepGrid[currentX, currentY + 1] != 0 ? 780 : 760);
 					continue;
 				case 760:
 					randomInt = Random(2);
-					GotoLine(770);
+					SetTarget(770);
 					continue;
 				case 770:
 					switch (randomInt)
 					{
-						case 1:
-							GotoLine(980);
-							break;
-						case 2:
-							GotoLine(1090);
-							break;
-						default:
-							GotoLine(780);
-							break;
+						case 1: SetTarget(980); break;
+						case 2: SetTarget(1090); break;
+						default: SetTarget(780); break;
 					}
 					continue;
 				case 780:
-					GotoLine(980);
+					SetTarget(980);
 					continue;
 				case 790:
-					GotoLine(randomInteger == width ? 880 : 800);
+					SetTarget(currentX == width ? 880 : 800);
 					continue;
 				case 800:
-					GotoLine(widthArray[randomInteger + 1, s] != 0 ? 880 : 810);
+					SetTarget(visitedStepGrid[currentX + 1, currentY] != 0 ? 880 : 810);
 					continue;
 				case 810:
-					GotoLine(s != height ? 840 : 820);
+					SetTarget(currentY != height ? 840 : 820);
 					continue;
 				case 820:
-					GotoLine(z == 1 ? 870 : 830);
+					SetTarget(z == 1 ? 870 : 830);
 					continue;
 				case 830:
 					q = 1;
-					GotoLine(990);
+					SetTarget(990);
 					continue;
 				case 840:
-					GotoLine(widthArray[randomInteger, s + 1] != 0 ? 870 : 850);
+					SetTarget(visitedStepGrid[currentX, currentY + 1] != 0 ? 870 : 850);
 					continue;
 				case 850:
 					randomInt = Random(2);
-					GotoLine(860);
+					SetTarget(860);
 					continue;
 				case 860:
 					switch (randomInt)
 					{
-						case 1:
-							GotoLine(1020);
-							break;
-						case 2:
-							GotoLine(1090);
-							break;
-						default:
-							GotoLine(870);
-							break;
+						case 1: SetTarget(1020); break;
+						case 2: SetTarget(1090); break;
+						default: SetTarget(870); break;
 					}
 					continue;
 				case 870:
-					GotoLine(1020);
+					SetTarget(1020);
 					continue;
 				case 880:
-					GotoLine(s != height ? 910 : 890);
+					SetTarget(currentY != height ? 910 : 890);
 					continue;
 				case 890:
-					GotoLine(z == 1 ? 930 : 900);
+					SetTarget(z == 1 ? 930 : 900);
 					continue;
 				case 900:
 					q = 1;
-					GotoLine(920);
+					SetTarget(920);
 					continue;
 				case 910:
-					GotoLine(widthArray[randomInteger, s + 1] != 0 ? 930 : 920);
+					SetTarget(visitedStepGrid[currentX, currentY + 1] != 0 ? 930 : 920);
 					continue;
 				case 920:
-					GotoLine(1090);
+					SetTarget(1090);
 					continue;
 				case 930:
-					GotoLine(1190);
+					SetTarget(1190);
 					continue;
 				case 940:
-					widthArray[randomInteger - 1,s] = counter;
-					GotoLine(950);
+					visitedStepGrid[currentX - 1, currentY] = stepCounter;
+					SetTarget(950);
 					continue;
 				case 950:
-					counter++;
-					verticalArray[randomInteger - 1,s] = 2;
-					randomInteger--;
-					GotoLine(960);
+					stepCounter++;
+					cellWallConfig[currentX - 1, currentY] = 2;
+					currentX--;
+					SetTarget(960);
 					continue;
 				case 960:
-					GotoLine(counter == width * height + 1 ? 1200 : 970);
+					SetTarget(stepCounter == width * height + 1 ? 1200 : 970);
 					continue;
 				case 970:
 					q = 0;
-					GotoLine(270);
+					SetTarget(270);
 					continue;
 				case 980:
-					widthArray[randomInteger,s - 1] = counter;
-					GotoLine(990);
+					visitedStepGrid[currentX, currentY - 1] = stepCounter;
+					SetTarget(990);
 					continue;
 				case 990:
-					counter++;
-					GotoLine(1000);
+					stepCounter++;
+					SetTarget(1000);
 					continue;
 				case 1000:
-					verticalArray[randomInteger,s - 1] = 1;
-					s--;
-					GotoLine(counter == width * height + 1 ? 1200 : 1010);
+					cellWallConfig[currentX, currentY - 1] = 1;
+					currentY--;
+					SetTarget(stepCounter == width * height + 1 ? 1200 : 1010);
 					continue;
 				case 1010:
 					q = 0;
-					GotoLine(270);
+					SetTarget(270);
 					continue;
 				case 1020:
-					widthArray[randomInteger + 1,s] = counter;
-					GotoLine(1030);
+					visitedStepGrid[currentX + 1, currentY] = stepCounter;
+					SetTarget(1030);
 					continue;
 				case 1030:
-					counter++;
-					GotoLine(verticalArray[randomInteger, s] == 0 ? 1050 : 1040);
+					stepCounter++;
+					SetTarget(cellWallConfig[currentX, currentY] == 0 ? 1050 : 1040);
 					continue;
 				case 1040:
-					verticalArray[randomInteger,s] = 3;
-					GotoLine(1060);
+					cellWallConfig[currentX, currentY] = 3;
+					SetTarget(1060);
 					continue;
 				case 1050:
-					verticalArray[randomInteger,s] = 2;
-					GotoLine(1060);
+					cellWallConfig[currentX, currentY] = 2;
+					SetTarget(1060);
 					continue;
 				case 1060:
-					randomInteger++;
-					GotoLine(1070);
+					currentX++;
+					SetTarget(1070);
 					continue;
 				case 1070:
-					GotoLine(counter == width * height + 1 ? 1200 : 1080);
+					SetTarget(stepCounter == width * height + 1 ? 1200 : 1080);
 					continue;
 				case 1080:
-					GotoLine(600);
+					SetTarget(600);
 					continue;
 				case 1090:
-					GotoLine(q == 1 ? 1150 : 1100);
+					SetTarget(q == 1 ? 1150 : 1100);
 					continue;
 				case 1100:
-					widthArray[randomInteger,s + 1] = counter;
-					counter++;
-					GotoLine(verticalArray[randomInteger, s] == 0 ? 1120 : 1110);
+					visitedStepGrid[currentX, currentY + 1] = stepCounter;
+					stepCounter++;
+					SetTarget(cellWallConfig[currentX, currentY] == 0 ? 1120 : 1110);
 					continue;
 				case 1110:
-					verticalArray[randomInteger,s] = 3;
-					GotoLine(1130);
+					cellWallConfig[currentX, currentY] = 3;
+					SetTarget(1130);
 					continue;
 				case 1120:
-					verticalArray[randomInteger,s] = 1;
-					GotoLine(1130);
+					cellWallConfig[currentX, currentY] = 1;
+					SetTarget(1130);
 					continue;
 				case 1130:
-					s++;
-					GotoLine(counter == height * width + 1 ? 1200 : 1140);
+					currentY++;
+					SetTarget(stepCounter == height * width + 1 ? 1200 : 1140);
 					continue;
 				case 1140:
-					GotoLine(270);
+					SetTarget(270);
 					continue;
 				case 1150:
 					z = 1;
-					GotoLine(1160);
+					SetTarget(1160);
 					continue;
 				case 1160:
-					GotoLine(verticalArray[randomInteger, s] == 0 ? 1180 : 1170);
+					SetTarget(cellWallConfig[currentX, currentY] == 0 ? 1180 : 1170);
 					continue;
 				case 1170:
-					verticalArray[randomInteger,s] = 3;
+					cellWallConfig[currentX, currentY] = 3;
 					q = 0;
-					GotoLine(1190);
+					SetTarget(1190);
 					continue;
 				case 1180:
-					verticalArray[randomInteger,s] = 1;
+					cellWallConfig[currentX, currentY] = 1;
 					q = 0;
-					randomInteger = 1;
-					s = 1;
-					GotoLine(260);
+					currentX = 1;
+					currentY = 1;
+					SetTarget(260);
 					continue;
 				case 1190:
-					GotoLine(210);
+					SetTarget(210);
 					continue;
 				case 1200:
 					Target = -1;
@@ -561,36 +486,34 @@ public abstract class Amaze
 			}
 		}
 
-		// 1200:
+		// Print maze body
 		for (var y = 1; y <= height; y++) 
 		{
-			PrintText(OuterWall);        // 1210
+			PrintText(OuterWall);
 
-			for (var x = 1; x <=  width; x++)
+			for (var x = 1; x <= width; x++)
 			{
-				PrintText(verticalArray[x, y] >= 2 ? "   " : $"  {OuterWall}"); // 1260
-				// 1240
+				PrintText(cellWallConfig[x, y] >= 2 ? "   " : $"  {OuterWall}");
 			}
 
-			PrintText(" ");   // 1280
+			PrintText(" ");
 			NewLine();
 
-			for (var i = 1; i <=  width; i++)
+			for (var i = 1; i <= width; i++)
 			{
-				switch (verticalArray[i,y])
+				switch (cellWallConfig[i, y])
 				{
 					case 0:
-					// 1310, 1340
 					case 2:
-						PrintText(HorizontalInternalWall);   // 1300, 1340
+						PrintText(HorizontalInternalWall);
 						break;
 					default:
-						PrintText(VerticalInternalWall); // 1320
+						PrintText(VerticalInternalWall);
 						break;
 				}
 			}
 
-			PrintText(":");    // 1360
+			PrintText(":");
 			NewLine();
 		}
 	}
