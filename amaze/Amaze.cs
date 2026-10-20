@@ -4,6 +4,8 @@ namespace amaze_new;
 
 public abstract class Amaze
 {
+	private const string InternalWall = ":--";
+
 	private static int Target { get; set; }
 	public static Random RandomSeed { get; set; } = new Random(0);
 
@@ -41,16 +43,8 @@ public abstract class Amaze
 	{
 		Target = lineNumber;
 	}
-	
-	public enum ProcessState {
-		Exit = 0,
-		Error = 404,
-		DrawWall = 100,
-		DrawEntrance = 270,
-		Finish = 500
-	}
 
-	public static void Run(int horizontalOriginal, int verticalOriginal) 
+	public static void Run(int xWidth, int yHeight) 
 	{
 		BlankLine();
 		PrintText("Amazing - Copyright by Creative Computing, Morristown, NJ");
@@ -58,19 +52,19 @@ public abstract class Amaze
 
 		
 		// Set default variable values
-		if ( horizontalOriginal == 1 || verticalOriginal == 1) return;
+		if ( xWidth == 1 || yHeight == 1) return;
 
-		var widthArray = new int[ horizontalOriginal + 1,verticalOriginal + 1];
-		var verticalArray = new int[ horizontalOriginal + 1,verticalOriginal + 1];
+		var widthArray = new int[ xWidth + 1,yHeight + 1];
+		var verticalArray = new int[ xWidth + 1,yHeight + 1];
 		
 		var q = 0;
 		var z = 0;
-		var randomInt = Random( horizontalOriginal);
-
+		var randomInt = Random( xWidth);
+		
 		// 130:170
-		for (var i = 1; i <=  horizontalOriginal; i++)
+		for (var i = 1; i <=  xWidth; i++)
 		{
-			PrintText(i == randomInt ? ":  " : ":--");
+			PrintText(i == randomInt ? ":  " : InternalWall);
 		}
 		// 180
 		PrintText(":");
@@ -86,20 +80,15 @@ public abstract class Amaze
 		var s = 1;
 		GotoLine(270);
 
-		while (true)
-		{
-			break;
-		}
-		
 		while (Target != -1) 
 		{
 			switch (Target) 
 			{
 				case 210:
-					GotoLine(randomInteger != horizontalOriginal ? 250 : 220);
+					GotoLine(randomInteger != xWidth ? 250 : 220);
 					continue;
 				case 220:
-					GotoLine(s != verticalOriginal ? 240 : 230);
+					GotoLine(s != yHeight ? 240 : 230);
 					continue;
 				case 230:
 					randomInteger = 1;
@@ -131,7 +120,7 @@ public abstract class Amaze
 					GotoLine(widthArray[randomInteger, s - 1] != 0 ? 430 : 310);
 					continue;
 				case 310:
-					GotoLine(randomInteger == horizontalOriginal ? 350 : 320);
+					GotoLine(randomInteger == xWidth ? 350 : 320);
 					continue;
 				case 320:
 					GotoLine(widthArray[randomInteger + 1, s] != 0 ? 350 : 330);
@@ -158,7 +147,7 @@ public abstract class Amaze
 					}
 					continue;
 				case 350:
-					GotoLine(s != verticalOriginal ? 380 : 360);
+					GotoLine(s != yHeight ? 380 : 360);
 					continue;
 				case 360:
 					GotoLine(z == 1 ? 410 : 370);
@@ -210,13 +199,13 @@ public abstract class Amaze
 					}
 					continue;
 				case 430:
-					GotoLine(randomInteger == horizontalOriginal ? 530 : 440);
+					GotoLine(randomInteger == xWidth ? 530 : 440);
 					continue;
 				case 440:
 					GotoLine(widthArray[randomInteger + 1, s] != 0 ? 530 : 450);
 					continue;
 				case 450:
-					GotoLine(s != verticalOriginal ? 480 : 460);
+					GotoLine(s != yHeight ? 480 : 460);
 					continue;
 				case 460:
 					GotoLine(z == 1 ? 510 : 470);
@@ -268,7 +257,7 @@ public abstract class Amaze
 					}
 					continue;
 				case 530:
-					GotoLine(s != verticalOriginal ? 560 : 540);
+					GotoLine(s != yHeight ? 560 : 540);
 					continue;
 				case 540:
 					GotoLine(z == 1 ? 590 : 550);
@@ -308,13 +297,13 @@ public abstract class Amaze
 					GotoLine(widthArray[randomInteger, s - 1] != 0 ? 790 : 620);
 					continue;
 				case 620:
-					GotoLine(randomInteger == horizontalOriginal ? 720 : 630);
+					GotoLine(randomInteger == xWidth ? 720 : 630);
 					continue;
 				case 630:
 					GotoLine(widthArray[randomInteger + 1, s] != 0 ? 720 : 640);
 					continue;
 				case 640:
-					GotoLine(s != verticalOriginal ? 670 : 650);
+					GotoLine(s != yHeight ? 670 : 650);
 					continue;
 				case 650:
 					GotoLine(z == 1 ? 700 : 660);
@@ -366,7 +355,7 @@ public abstract class Amaze
 					}
 					continue;
 				case 720:
-					GotoLine(s != verticalOriginal ? 750 : 730);
+					GotoLine(s != yHeight ? 750 : 730);
 					continue;
 				case 730:
 					GotoLine(z == 1 ? 780 : 740);
@@ -400,13 +389,13 @@ public abstract class Amaze
 					GotoLine(980);
 					continue;
 				case 790:
-					GotoLine(randomInteger == horizontalOriginal ? 880 : 800);
+					GotoLine(randomInteger == xWidth ? 880 : 800);
 					continue;
 				case 800:
 					GotoLine(widthArray[randomInteger + 1, s] != 0 ? 880 : 810);
 					continue;
 				case 810:
-					GotoLine(s != verticalOriginal ? 840 : 820);
+					GotoLine(s != yHeight ? 840 : 820);
 					continue;
 				case 820:
 					GotoLine(z == 1 ? 870 : 830);
@@ -440,7 +429,7 @@ public abstract class Amaze
 					GotoLine(1020);
 					continue;
 				case 880:
-					GotoLine(s != verticalOriginal ? 910 : 890);
+					GotoLine(s != yHeight ? 910 : 890);
 					continue;
 				case 890:
 					GotoLine(z == 1 ? 930 : 900);
@@ -469,7 +458,7 @@ public abstract class Amaze
 					GotoLine(960);
 					continue;
 				case 960:
-					GotoLine(counter == horizontalOriginal * verticalOriginal + 1 ? 1200 : 970);
+					GotoLine(counter == xWidth * yHeight + 1 ? 1200 : 970);
 					continue;
 				case 970:
 					q = 0;
@@ -486,7 +475,7 @@ public abstract class Amaze
 				case 1000:
 					verticalArray[randomInteger,s - 1] = 1;
 					s--;
-					GotoLine(counter == horizontalOriginal * verticalOriginal + 1 ? 1200 : 1010);
+					GotoLine(counter == xWidth * yHeight + 1 ? 1200 : 1010);
 					continue;
 				case 1010:
 					q = 0;
@@ -513,7 +502,7 @@ public abstract class Amaze
 					GotoLine(1070);
 					continue;
 				case 1070:
-					GotoLine(counter == horizontalOriginal * verticalOriginal + 1 ? 1200 : 1080);
+					GotoLine(counter == xWidth * yHeight + 1 ? 1200 : 1080);
 					continue;
 				case 1080:
 					GotoLine(600);
@@ -536,7 +525,7 @@ public abstract class Amaze
 					continue;
 				case 1130:
 					s++;
-					GotoLine(counter == verticalOriginal * horizontalOriginal + 1 ? 1200 : 1140);
+					GotoLine(counter == yHeight * xWidth + 1 ? 1200 : 1140);
 					continue;
 				case 1140:
 					GotoLine(270);
@@ -570,22 +559,22 @@ public abstract class Amaze
 		}
 
 		// 1200:
-		for (var j = 1; j <= verticalOriginal; j++) 
+		for (var y = 1; y <= yHeight; y++) 
 		{
 			PrintText("I");        // 1210
 
-			for (var i = 1; i <=  horizontalOriginal; i++)
+			for (var x = 1; x <=  xWidth; x++)
 			{
-				PrintText(verticalArray[i, j] >= 2 ? "   " : "  I"); // 1260
+				PrintText(verticalArray[x, y] >= 2 ? "   " : "  I"); // 1260
 				// 1240
 			}
 
 			PrintText(" ");   // 1280
 			NewLine();
 
-			for (var i = 1; i <=  horizontalOriginal; i++)
+			for (var i = 1; i <=  xWidth; i++)
 			{
-				switch (verticalArray[i,j])
+				switch (verticalArray[i,y])
 				{
 					case 0:
 					// 1310, 1340

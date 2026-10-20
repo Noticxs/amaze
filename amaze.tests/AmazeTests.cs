@@ -56,13 +56,7 @@ I                 I  I     I     I           I
         
         Console.WriteLine(Amaze.Result);
         
-        // var generateMaze = new AmazeNew();
-        // generateMaze.Runner(90, 90, IAmaze.Output.Text);
-        
         Assert.That(Amaze.Result, Is.EqualTo(expected), "Should have the maze that was expected");
-        
-        // Amaze.RandomSeed = new Random(1000);
-        // Amaze.Run(150, 200);
         
         Console.WriteLine(Amaze.Result);
     }
@@ -90,9 +84,6 @@ I        I  I
         
         Console.WriteLine(Amaze.Result);
         
-        // var generateMaze = new AmazeNew();
-        // generateMaze.Runner(90, 90, IAmaze.Output.Text);
-
         Assert.That(Amaze.Result, Is.EqualTo(expected), "Should have the maze that was expected");
     }
 }
