@@ -19,20 +19,30 @@ public abstract class Amaze
 	{
 		Run(int.Parse(args[0]), int.Parse(args[1]));
 	}
-
-	private static void BlankLine()
+	
+	private enum AppendMethods
 	{
-		Result = "";
-	}
+		NewLine,
+		Text,
+		BlankLine,
+	};
 
-	private static void NewLine() 
+	private static void Append(AppendMethods appendMethod, string? text)
 	{
-		Result += "\n";
-	}
-
-	private static void PrintText(string text)
-	{
-		Result += text;
+		switch (appendMethod)
+		{
+			case AppendMethods.NewLine:
+				Result += "\n";
+				break;
+			case AppendMethods.Text:
+				Result += text;
+				break;
+			case AppendMethods.BlankLine:
+				Result = "";
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(appendMethod), appendMethod, null);
+		}
 	}
 
 	private static int Random(int count) 
@@ -47,9 +57,9 @@ public abstract class Amaze
 
 	public static void Run(int width, int height) 
 	{
-		BlankLine();
-		PrintText("Amazing - Copyright by Creative Computing, Morristown, NJ");
-		NewLine();
+		Append(AppendMethods.BlankLine, null);
+		Append(AppendMethods.Text, "Amazing - Copyright by Creative Computing, Morristown, NJ");
+		Append(AppendMethods.NewLine, null);
 		
 		if (width == 1 || height == 1) return;
 		
@@ -58,15 +68,17 @@ public abstract class Amaze
 		
 		var hasHitBoundary = false;
 		var hasReachedOuterEdge = false;
+		
 		var randomInt = Random(width);
 		
 		// Print top border
 		for (var i = 1; i <= width; i++)
 		{
-			PrintText(i == randomInt ? VerticalInternalWall : HorizontalInternalWall);
+			Append(AppendMethods.Text, i == randomInt ? VerticalInternalWall : HorizontalInternalWall);
 		}
-		PrintText(":");
-		NewLine();
+		
+		Append(AppendMethods.Text, ":");
+		Append(AppendMethods.NewLine, null);
 
 		var stepCounter = 1;
 		visitedStepGrid[randomInt, 1] = stepCounter;
@@ -74,6 +86,7 @@ public abstract class Amaze
 
 		var currentX = randomInt;
 		var currentY = 1;
+		
 		SetTarget(270);
 
 		while (Target != -1) 
@@ -141,7 +154,7 @@ public abstract class Amaze
 					SetTarget(hasReachedOuterEdge ? 410 : 370);
 					continue;
 				case 370:
-					hasHitBoundary = true; // Fixed: assigned true instead of 1
+					hasHitBoundary = true;
 					SetTarget(390);
 					continue;
 				case 380:
@@ -185,7 +198,7 @@ public abstract class Amaze
 					SetTarget(hasReachedOuterEdge ? 510 : 470);
 					continue;
 				case 470:
-					hasHitBoundary = true; // Fixed: assigned true instead of 1
+					hasHitBoundary = true;
 					SetTarget(490);
 					continue;
 				case 480:
@@ -223,7 +236,7 @@ public abstract class Amaze
 					SetTarget(hasReachedOuterEdge ? 590 : 550);
 					continue;
 				case 550:
-					hasHitBoundary = true; // Fixed: assigned true instead of 1
+					hasHitBoundary = true;
 					SetTarget(570);
 					continue;
 				case 560:
@@ -489,15 +502,15 @@ public abstract class Amaze
 		// Print maze body
 		for (var y = 1; y <= height; y++) 
 		{
-			PrintText(OuterWall);
+			Append(AppendMethods.Text, OuterWall);
 
 			for (var x = 1; x <= width; x++)
 			{
-				PrintText(cellWallConfig[x, y] >= 2 ? "   " : $"  {OuterWall}");
+				Append(AppendMethods.Text, cellWallConfig[x, y] >= 2 ? "   " : $"  {OuterWall}");
 			}
 
-			PrintText(" ");
-			NewLine();
+			Append(AppendMethods.Text, " ");
+			Append(AppendMethods.NewLine, null);
 
 			for (var i = 1; i <= width; i++)
 			{
@@ -505,16 +518,16 @@ public abstract class Amaze
 				{
 					case 0:
 					case 2:
-						PrintText(HorizontalInternalWall);
+						Append(AppendMethods.Text, HorizontalInternalWall);
 						break;
 					default:
-						PrintText(VerticalInternalWall);
+						Append(AppendMethods.Text, VerticalInternalWall);
 						break;
 				}
 			}
 
-			PrintText(":");
-			NewLine();
+			Append(AppendMethods.Text, ":");
+			Append(AppendMethods.NewLine, null);
 		}
 	}
 }
