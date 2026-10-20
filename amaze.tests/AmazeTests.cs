@@ -57,8 +57,6 @@ I                 I  I     I     I           I
         Console.WriteLine(Amaze.Result);
         
         Assert.That(Amaze.Result, Is.EqualTo(expected), "Should have the maze that was expected");
-        
-        Console.WriteLine(Amaze.Result);
     }
 
     [Test]
@@ -77,6 +75,7 @@ I  I     I  I
 I        I  I 
 :--:--:--:  :
 ";
+        
         // GOAL -> simplify this code out
         
         Amaze.RandomSeed = new Random(100);
