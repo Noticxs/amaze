@@ -9,7 +9,7 @@ public abstract class Amaze
 	private const string OuterWall = "I";
 	
 	private static int Target { get; set; }
-	public static Random RandomSeed { get; set; } = new Random(0);
+	public static Random RandomSeed { get; set; } = new(0);
 
 #pragma warning disable CA2211
 	public static string Result = "";
@@ -500,21 +500,21 @@ public abstract class Amaze
 		}
 
 		// Print maze body
-		for (var y = 1; y <= height; y++) 
+		for (var col = 1; col <= height; col++) 
 		{
 			Append(AppendMethods.Text, OuterWall);
 
 			for (var x = 1; x <= width; x++)
 			{
-				Append(AppendMethods.Text, cellWallConfig[x, y] >= 2 ? "   " : $"  {OuterWall}");
+				Append(AppendMethods.Text, cellWallConfig[x, col] >= 2 ? "   " : $"  {OuterWall}");
 			}
 
 			Append(AppendMethods.Text, " ");
 			Append(AppendMethods.NewLine, null);
 
-			for (var i = 1; i <= width; i++)
+			for (var row = 1; row <= width; row++)
 			{
-				switch (cellWallConfig[i, y])
+				switch (cellWallConfig[row, col])
 				{
 					case 0:
 					case 2:
