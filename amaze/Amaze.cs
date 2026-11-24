@@ -47,7 +47,7 @@ public static class Amaze
 
     private static int Random(int count)
     {
-        return (int)(RandomSeed.NextDouble() * count) + 1 <= count ? (int)(RandomSeed.NextDouble() * count) + 1 : count;
+        return Math.Min((int)(RandomSeed.NextDouble() * count) + 1, count);
     }
 
     private static void SetTarget(int lineNumber)
